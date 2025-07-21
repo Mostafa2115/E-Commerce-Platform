@@ -10,7 +10,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('user_id', Auth::id())->get();
+        $orders = Order::where('user_id', Auth::id())->with("product.photos")->get();
 
         return view('order.index', compact('orders'));
     }

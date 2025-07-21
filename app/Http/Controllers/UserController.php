@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::orderBy('id')->get();
+        $users = User::orderBy('id')->with('country')->get();
 
         return view('dashboard.users.index', compact('users'));
     }

@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::take(6)->get();
+        $products = Product::take(6)->with("photos", "user.country")->get();
         $categories = Category::take(11)->get();
 
         return view('home.index', compact('products', 'categories'));

@@ -59,7 +59,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%'.$request->search.'%');
         }
 
-        $products = $query->with(['user.country'])->paginate(12);
+        $products = $query->with("user.country", "photos")->paginate(12);
         $categories = \App\Models\Category::all();
 
         return view('product.index', compact('products', 'categories'));
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
     public function indexAll(Request $request)
     {
-        $products = Product::orderBy('id')->get();
+        $products = Product::orderBy('id')->with("user", "category")->get();
 
         return view('dashboard.products.index', compact('products'));
     }
